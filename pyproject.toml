@@ -28,7 +28,7 @@ Homepage = "https://github.com/noisethewhite/heresy"
 [tool.setuptools.packages.find]
 where = ["src"]
 
-[tool.setuptools-scm]
+[tool.setuptools_scm]
 tag_regex = "^v(?P<version>.*)$"
 write_to = "src/heresy/_version.py"
 version_scheme = "no-guess-dev"
