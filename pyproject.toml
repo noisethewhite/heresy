@@ -29,6 +29,7 @@ Homepage = "https://github.com/noisethewhite/heresy"
 where = ["src"]
 
 [tool.setuptools_scm]
+root = "."
 tag_regex = "^v(?P<version>\\d+\\.\\d+\\.\\d+)$"
 write_to = "src/heresy/_version.py"
 version_scheme = "no-guess-dev"
