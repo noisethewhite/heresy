@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=82", "setuptools-scm>=9", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "heresy"
+dynamic = ["version"]
+description = "A Python extension module with controversial features."
+readme = "README.md"
+requires-python = ">=3.13"
+license = { text = "MIT" }
+
+authors = [
+  { name = "Noise The White" }
+]
+
+dependencies = []
+
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+
+[project.urls]
+Homepage = "https://github.com/noisethewhite/heresy"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools_scm]
+write_to = "src/ntwx/_version.py"
+version_scheme = "no-guess-dev"
+local_scheme = "no-local-version"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
