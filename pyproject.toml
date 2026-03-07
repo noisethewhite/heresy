@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "heresy"
 dynamic = ["version"]
-description = "A Python extension module with controversial features."
+description = "A Python extension module with heavily opinionated features."
 readme = "README.md"
 requires-python = ">=3.13"
 license = { text = "MIT" }
