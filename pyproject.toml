@@ -32,7 +32,7 @@ where = ["src"]
 root = "."
 tag_regex = "^v(?P<version>\\d+\\.\\d+\\.\\d+)$"
 write_to = "src/heresy/_version.py"
-version_scheme = "no-guess-dev"
+version_scheme = "only-version"
 local_scheme = "no-local-version"
 
 [tool.pytest.ini_options]
