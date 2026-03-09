@@ -28,6 +28,9 @@ Homepage = "https://github.com/noisethewhite/heresy"
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.setuptools.package-data]
+mypackage = ["py.typed"]
+
 [tool.setuptools_scm]
 root = "."
 tag_regex = "^v(?P<version>\\d+\\.\\d+\\.\\d+)$"
@@ -38,3 +41,4 @@ local_scheme = "no-local-version"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
+

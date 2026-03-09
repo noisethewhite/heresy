@@ -35,7 +35,7 @@ def singleton(_cls: type[_T]) -> type[_T]:
             reg_data.is_initialized = True
 
 
-    _cls.__new__ = staticmethod(__new__)
-    _cls.__init__ = __init__
+    setattr(_cls, "__new__", staticmethod(__new__))
+    setattr(_cls, "__init__", __init__)
 
     return _cls
