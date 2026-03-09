@@ -28,10 +28,10 @@ def singleton(_cls: type[_T]) -> type[_T]:
                     reg_data.instance = orig_new(cls, *args, **kwargs)
         return cast(_T, reg_data.instance)
 
-    def __init__(self: _T) -> None:
+    def __init__(self: object) -> None:
         reg_data = SingletonRegistry.data[type(self)]
         if not reg_data.is_initialized:
-            orig_init(self)
+            orig_init(cast(_T, self))
             reg_data.is_initialized = True
 
 
