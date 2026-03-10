@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import TypeVar, Any, Generic, overload, override
+from typing import TypeVar, Any, Generic, overload
 import collections.abc as cabc
 import threading
 from ._internal.singleton_registry import SingletonRegistry
@@ -9,7 +9,7 @@ _T = TypeVar("_T")
 _R = TypeVar("_R")
 
 
-class singletonproperty(property, Generic[_T, _R]):
+class singletonproperty(Generic[_T, _R]):
     _fget: cabc.Callable[[_T], _R] | None
     _fset: cabc.Callable[[_T, Any], None] | None
     _fdel: cabc.Callable[[_T], None] | None
@@ -19,7 +19,6 @@ class singletonproperty(property, Generic[_T, _R]):
     def __set_name__(self, owner: type[_T], _: str) -> None:
         self._owner = owner
 
-    @override
     def __init__(
         self,
         fget: cabc.Callable[[_T], _R] | None = None,
@@ -45,38 +44,32 @@ class singletonproperty(property, Generic[_T, _R]):
     @overload
     def __get__(self, obj: _T, _: type[_T] | None = ...) -> _R: ...
 
-    @override
     def __get__(self, obj: _T | None, _: type[_T] | None = None) -> _R | singletonproperty[_T, _R]:
         if self._fget is None:
             raise AttributeError("cannot get attribute.")
         with self._lock:
             return self._fget(self._instance)
 
-    @override
     def __set__(self, _: object, value: Any) -> None:
         if self._fset is None:
             raise AttributeError("cannot set attribute.")
         with self._lock:
             return self._fset(self._instance, value)
 
-    @override
     def __delete__(self, _: object) -> None:
         if self._fdel is None:
             raise AttributeError("cannot delete attribute.")
         with self._lock:
             self._fdel(self._instance)
 
-    @override
     def getter(self, fget: cabc.Callable[[_T], _R]) -> singletonproperty[_T, _R]:
         self._fget = fget
         return self
 
-    @override
     def setter(self, fset: cabc.Callable[[_T, Any], None]) -> singletonproperty[_T, _R]:
         self._fset = fset
         return self
 
-    @override
     def deleter(self, fdel: cabc.Callable[[_T], None]) -> singletonproperty[_T, _R]:
         self._fdel = fdel
         return self
