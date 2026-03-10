@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import TypeVar, Any, Generic, overload
+from typing import TypeVar, Any, Generic
 import collections.abc as cabc
 import threading
 from ._internal.singleton_registry import SingletonRegistry
@@ -38,13 +38,7 @@ class singletonproperty(Generic[_T, _R]):
             raise TypeError("singletonproperty must only be used inside a singleton.")
         return self._owner()
 
-    @overload
-    def __get__(self, obj: None, _: type[_T]) -> singletonproperty[_T, _R]: ...
-
-    @overload
-    def __get__(self, obj: _T, _: type[_T] | None = ...) -> _R: ...
-
-    def __get__(self, obj: _T | None, _: type[_T] | None = None) -> _R | singletonproperty[_T, _R]:
+    def __get__(self, obj: _T | None, _: type[_T] | None = None) -> _R:
         if self._fget is None:
             raise AttributeError("cannot get attribute.")
         with self._lock:
